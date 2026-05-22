@@ -15,6 +15,7 @@ import Footer from "@/components/footer"
 
 export default function Home() {
   return (
+
     <main className="overflow-x-hidden">
       <Navbar />
       <HeroSection />
