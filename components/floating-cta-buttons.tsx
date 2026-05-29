@@ -7,9 +7,10 @@ export default function FloatingCTAButtons() {
   const whatsappNumber = "919326969679"
   const message = "Hi! I'm interested in InDawn Space's interior design services."
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-  
+
   // Gmail compose URL targeting Gmail only
-  const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=Info@Indawn.In"
+  const gmailUrl =
+    "https://mail.google.com/mail/?view=cm&fs=1&to=Info@Indawn.In"
 
   return (
     <motion.div
@@ -18,13 +19,14 @@ export default function FloatingCTAButtons() {
       transition={{ delay: 0.5, duration: 0.6 }}
       className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-30 flex items-center justify-center w-full px-4 pb-6"
     >
-      <div className="flex items-center justify-center gap-0 bg-[var(--brand-charcoal)] rounded-full shadow-2xl overflow-hidden border border-[var(--brand-teal)]/20 backdrop-blur-sm">
+      <div className="flex items-center justify-center gap-0 bg-[var(--brand-teal)] rounded-full shadow-2xl overflow-hidden border border-white/20 backdrop-blur-sm">
+        
         {/* Call Button */}
         <motion.a
           href="tel:+919326969679"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold text-sm hover:bg-white/5 transition-colors border-r border-white/10"
+          className="flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold text-sm hover:bg-white/10 transition-colors border-r border-white/20"
           aria-label="Call us"
         >
           <Phone className="w-5 h-5" />
@@ -38,7 +40,7 @@ export default function FloatingCTAButtons() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold text-sm hover:bg-white/5 transition-colors border-r border-white/10"
+          className="flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold text-sm hover:bg-white/10 transition-colors border-r border-white/20"
           aria-label="Open Gmail to enquire"
         >
           <Mail className="w-5 h-5" />
@@ -52,7 +54,7 @@ export default function FloatingCTAButtons() {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold text-sm hover:bg-white/5 transition-colors"
+          className="flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold text-sm hover:bg-white/10 transition-colors"
           aria-label="Chat on WhatsApp"
         >
           <MessageCircle className="w-5 h-5" fill="currentColor" />

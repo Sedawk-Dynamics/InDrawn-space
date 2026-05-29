@@ -29,7 +29,7 @@ const centres = [
   // },
   {
     city: "Dombivli",
-    address: "Ground Floor, Skyline Plaza, Manpada Road, Dombivli – 421 203",
+    address: "Lodha Premier Signet A, Office no 1008, Premier Colony Kalyan-Shil Road, Dombivali East Kalyan, Thane -421204",
     phone: "+91 9372 569 679",
     hours: "Mon–Sun: 10am – 8pm",
     highlight: false,
@@ -59,54 +59,58 @@ export default function ExperienceSection() {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setError("")
-    setLoading(true)
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  setError("")
+  setLoading(true)
 
-    if (!formData.name || !formData.phone || !formData.email) {
-      setError("Please fill in all fields")
-      setLoading(false)
+  if (!formData.name || !formData.phone || !formData.email) {
+    setError("Please fill in all fields")
+    setLoading(false)
+    return
+  }
+
+  try {
+    const response = await fetch("/api/send-enquiry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        serviceType: `${formData.homeType} Design Consultation`,
+        message: `Requested a free consultation.
+Home Type: ${formData.homeType}
+City: ${formData.city}`,
+      }),
+    })
+
+    if (response.ok) {
+      // Reset form
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        homeType: "1 BHK",
+        city: "Mumbai",
+      })
+
+      // Redirect to Thank You page
+      window.location.assign("/thank-you")
       return
     }
 
-    try {
-      const response = await fetch("/api/send-enquiry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          serviceType: `${formData.homeType} Design Consultation`,
-          message: `Requested a free consultation.\nHome Type: ${formData.homeType}\nCity: ${formData.city}`,
-        }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setSubmitted(true)
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          homeType: "1 BHK",
-          city: "Mumbai",
-        })
-      } else {
-        setError(data.message || "Failed to submit consultation request.")
-      }
-    } catch (err) {
-      setError("An error occurred. Please try again.")
-      console.error("Consultation form error:", err)
-    } finally {
-      setLoading(false)
-    }
+    const data = await response.json()
+    setError(data.message || "Failed to submit consultation request.")
+  } catch (err) {
+    setError("An error occurred. Please try again.")
+    console.error("Consultation form error:", err)
+  } finally {
+    setLoading(false)
   }
-
+}
   return (
     <section id="experience" className="py-20 lg:py-28 bg-[var(--brand-cream)] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
@@ -346,7 +350,7 @@ export default function ExperienceSection() {
                   {centre.hours}
                 </div>
               </div>
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.02 }}
                 className={`mt-4 w-full py-2 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors ${
                   centre.highlight
@@ -356,7 +360,7 @@ export default function ExperienceSection() {
               >
                 <Navigation className="w-3 h-3" />
                 Get Directions
-              </motion.button>
+              </motion.button> */}
             </motion.div>
           ))}
         </motion.div>

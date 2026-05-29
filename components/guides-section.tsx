@@ -126,10 +126,10 @@ export default function GuidesSection() {
                   {guide.excerpt}
                 </p>
 
-                <div className="flex items-center gap-1.5 text-sm font-medium text-[var(--brand-teal)] group-hover:gap-2.5 transition-all duration-200">
+                {/* <div className="flex items-center gap-1.5 text-sm font-medium text-[var(--brand-teal)] group-hover:gap-2.5 transition-all duration-200">
                   Read Article
                   <ArrowRight className="w-4 h-4" />
-                </div>
+                </div> */}
               </div>
             </motion.article>
           ))}

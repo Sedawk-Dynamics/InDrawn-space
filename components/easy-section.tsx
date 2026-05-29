@@ -116,10 +116,11 @@ export default function EasySection() {
                 {/* Content */}
                 <div>
                   <div className="font-serif text-2xl font-bold text-[var(--brand-charcoal)] leading-tight">
-                    45 Days Delivery
+                    45 Days Delivery* 
                   </div>
                   <div className="text-sm text-[var(--muted-foreground)]">
-                    On-time completion promise
+Terms & Conditions Apply <br />
+    Guaranteed On-Time Completion
                   </div>
                 </div>
               </div>
