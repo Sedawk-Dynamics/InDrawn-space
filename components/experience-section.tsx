@@ -143,11 +143,12 @@ City: ${formData.city}`,
             className="relative rounded-3xl overflow-hidden shadow-2xl h-72 sm:h-96 lg:h-full min-h-[320px]"
           >
             <Image
-              src="/images/experience-centre.jpg"
-              alt="InDawn Space Experience Centre"
-              fill
-              className="object-cover"
-            />
+  src="/team.jpeg"
+  alt="InDawn Space Experience Centre"
+  fill
+  className="object-cover object-top"
+  priority
+/>
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--brand-charcoal)]/60 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
               <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4">

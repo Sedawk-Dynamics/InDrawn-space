@@ -3,58 +3,27 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Loader2, CheckCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 interface EnquiryFormProps {
   isOpen: boolean
   onClose: () => void
 }
 
-const serviceTypes = [
-  "Living Room Design",
-  "Bedroom Interiors",
-  "Modular Kitchen",
-  "Dining Room",
-  "Home Office",
-  "Full Home Makeover",
-  "Vastu-Compliant Design",
-  "3D Visualization",
-  "Other",
-]
-
 export default function EnquiryForm({ isOpen, onClose }: EnquiryFormProps) {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    serviceType: "",
-    message: "",
   })
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState("")
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
-
-  const handleServiceChange = (value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      serviceType: value,
     }))
   }
 
@@ -63,7 +32,7 @@ export default function EnquiryForm({ isOpen, onClose }: EnquiryFormProps) {
     setError("")
     setLoading(true)
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.serviceType) {
+    if (!formData.name || !formData.phone) {
       setError("Please fill in all required fields")
       setLoading(false)
       return
@@ -84,10 +53,7 @@ export default function EnquiryForm({ isOpen, onClose }: EnquiryFormProps) {
         setSubmitted(true)
         setFormData({
           name: "",
-          email: "",
           phone: "",
-          serviceType: "",
-          message: "",
         })
         setTimeout(() => {
           onClose()
@@ -107,7 +73,7 @@ export default function EnquiryForm({ isOpen, onClose }: EnquiryFormProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -182,21 +148,7 @@ export default function EnquiryForm({ isOpen, onClose }: EnquiryFormProps) {
 
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                          Email Address *
-                        </label>
-                        <Input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="your@email.com"
-                          className="w-full"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                          Phone Number *
+                          Mobile Number *
                         </label>
                         <Input
                           type="tel"
@@ -205,38 +157,6 @@ export default function EnquiryForm({ isOpen, onClose }: EnquiryFormProps) {
                           onChange={handleChange}
                           placeholder="+91 98765 43210"
                           className="w-full"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                          Service Type *
-                        </label>
-                        <Select value={formData.serviceType} onValueChange={handleServiceChange}>
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select a service" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {serviceTypes.map((service) => (
-                              <SelectItem key={service} value={service}>
-                                {service}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                          Message
-                        </label>
-                        <Textarea
-                          name="message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          placeholder="Tell us about your project..."
-                          className="w-full resize-none"
-                          rows={3}
                         />
                       </div>
 

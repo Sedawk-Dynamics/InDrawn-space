@@ -3,10 +3,10 @@ import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
-    const { name, email, phone, serviceType, message } = await request.json();
+    const { name, phone } = await request.json();
 
     // Validate required fields
-    if (!name || !email || !phone || !serviceType) {
+    if (!name || !phone) {
       return NextResponse.json(
         { success: false, message: 'Missing required fields' },
         { status: 400 }
@@ -39,39 +39,14 @@ export async function POST(request: Request) {
     const businessMailOptions = {
       from: process.env.FROM_EMAIL,
       to: process.env.BUSINESS_EMAIL || process.env.FROM_EMAIL,
-      subject: `New Enquiry from ${name} - ${serviceType}`,
+      subject: `New Enquiry from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <h2 style="color: #1a8a80;">New Enquiry Received</h2>
           <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Service Type:</strong> ${serviceType}</p>
-          <p><strong>Message:</strong></p>
-          <p style="white-space: pre-wrap;">${message || 'No message provided'}</p>
+          <p><strong>Mobile Number:</strong> ${phone}</p>
           <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
           <p style="color: #666; font-size: 12px;">This is an automated message from your website contact form.</p>
-        </div>
-      `,
-    };
-
-    // Confirmation email to user
-    const userMailOptions = {
-      from: process.env.FROM_EMAIL,
-      to: email,
-      subject: 'Thank you for your enquiry - InDawn Space',
-      html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-          <h2 style="color: #1a8a80;">Thank You, ${name}!</h2>
-          <p>We have received your enquiry about <strong>${serviceType}</strong>.</p>
-          <p>Our team will review your request and get back to you as soon as possible.</p>
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
-          <h3 style="color: #1a8a80;">Your Enquiry Details:</h3>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Service Type:</strong> ${serviceType}</p>
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
-          <p style="color: #666;">InDawn Space - Where Living Meets Luxury</p>
-          <p style="color: #666; font-size: 12px;">© ${new Date().getFullYear()} InDawn Space. All rights reserved.</p>
         </div>
       `,
     };
@@ -85,21 +60,13 @@ export async function POST(request: Request) {
       throw new Error('Failed to verify SMTP connection');
     }
 
-    // Send both emails
+    // Send enquiry email to the business
     try {
       await transporter.sendMail(businessMailOptions);
       console.log('[v0] Business email sent successfully');
     } catch (businessEmailError) {
       console.error('[v0] Failed to send business email:', businessEmailError);
       throw businessEmailError;
-    }
-
-    try {
-      await transporter.sendMail(userMailOptions);
-      console.log('[v0] User confirmation email sent successfully');
-    } catch (userEmailError) {
-      console.error('[v0] Failed to send user email:', userEmailError);
-      throw userEmailError;
     }
 
     return NextResponse.json({

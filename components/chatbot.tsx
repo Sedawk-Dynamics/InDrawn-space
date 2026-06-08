@@ -89,7 +89,7 @@ export default function ChatBot() {
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-24 right-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-[var(--brand-teal)] text-white shadow-lg hover:shadow-xl transition-shadow"
+        className="fixed bottom-24 left-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-[var(--brand-teal)] text-white shadow-lg hover:shadow-xl transition-shadow"
         aria-label="Open chat"
       >
         <MessageCircle className="w-7 h-7" />
@@ -104,8 +104,8 @@ export default function ChatBot() {
       exit={{ opacity: 0, scale: 0.95 }}
       className={`fixed z-40 bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-300 ${
         isMinimized
-          ? "bottom-6 right-6 w-72 h-16"
-          : "bottom-6 right-6 w-72 sm:w-80 h-96 sm:h-[500px]"
+          ? "bottom-6 left-6 w-72 h-16"
+          : "bottom-6 left-6 w-72 sm:w-80 h-96 sm:h-[500px]"
       }`}
     >
       {/* Header */}
