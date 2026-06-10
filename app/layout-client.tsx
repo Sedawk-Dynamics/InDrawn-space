@@ -23,18 +23,27 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
     setLeadCaptured,
   } = useApp()
 
-  // Smart lead capture: only surface the enquiry popup when the chatbot is
+  // Smart lead capture: surface the enquiry popup only when the chatbot is
   // closed/inactive, nothing else is open, and the user hasn't already shared
   // their details. This avoids interrupting an active conversation while still
   // recovering leads from visitors who leave chat without converting.
+  //
+  // We use a one-shot 45s timeout (not a repeating interval) and bail out while
+  // anything is already open. Because the effect re-runs when `enquiryOpen`
+  // flips back to false, closing the popup schedules a FRESH 45s countdown —
+  // so it never reopens immediately, only a full 45s after the last close.
   useEffect(() => {
+    // Don't schedule while the popup (or chat/appointment) is open, or once the
+    // lead is captured.
+    if (chatOpen || enquiryOpen || appointmentOpen || leadCaptured) return
+
     const canPrompt = () =>
       !chatOpen && !enquiryOpen && !appointmentOpen && !leadCaptured
 
-    // Time-based prompt (~25s of inactivity outside chat).
-    const interval = setInterval(() => {
+    // Time-based prompt: 45s after load / after the popup was last closed.
+    const timer = setTimeout(() => {
       if (canPrompt()) setEnquiryOpen(true)
-    }, 25000)
+    }, 45000)
 
     // Exit-intent prompt (desktop): cursor leaves the top of the viewport.
     const handleMouseOut = (e: MouseEvent) => {
@@ -43,7 +52,7 @@ function LayoutShell({ children }: { children: React.ReactNode }) {
     document.addEventListener('mouseout', handleMouseOut)
 
     return () => {
-      clearInterval(interval)
+      clearTimeout(timer)
       document.removeEventListener('mouseout', handleMouseOut)
     }
   }, [chatOpen, enquiryOpen, appointmentOpen, leadCaptured, setEnquiryOpen])
