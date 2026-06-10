@@ -21,7 +21,7 @@ const navLinks = [
   { label: "Designs", href: "#designs" },
   { label: "Why Us", href: "#why-us" },
   { label: "Our Team", href: "#designers" },
-  { label: "Experience Centre", href: "#experience" },
+  // { label: "Experience Centre", href: "#experience" },
 ]
 
 export default function Navbar() {

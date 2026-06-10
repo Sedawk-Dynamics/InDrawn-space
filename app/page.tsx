@@ -10,13 +10,14 @@ import DesignersSection from "@/components/designers-section"
 import GuidesSection from "@/components/guides-section"
 import ExperienceSection from "@/components/experience-section"
 import FoundedSection from "@/components/founded-section"
+import MissionVisionSection from "@/components/mission-vision-section"
 import DesignGallerySection from "@/components/design-gallery-section"
 import Footer from "@/components/footer"
 
 export default function Home() {
   return (
 
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden pb-[max(6rem,env(safe-area-inset-bottom))]">
       <Navbar />
       <HeroSection />
       <EasySection />
@@ -25,6 +26,7 @@ export default function Home() {
       <DesignGallerySection />
       <WhyUsSection />
       <TestimonialsSection />
+      <MissionVisionSection />
       <PartnersSection />
       <DesignersSection />
       <GuidesSection />

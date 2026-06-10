@@ -7,6 +7,12 @@ interface AppContextType {
   setEnquiryOpen: (open: boolean) => void
   appointmentOpen: boolean
   setAppointmentOpen: (open: boolean) => void
+  /** True while the chatbot panel is open (full priority on mobile). */
+  chatOpen: boolean
+  setChatOpen: (open: boolean) => void
+  /** True once the user has shared lead details (in chat or via the enquiry form). */
+  leadCaptured: boolean
+  setLeadCaptured: (captured: boolean) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -14,6 +20,8 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export function AppProvider({ children }: { children: ReactNode }) {
   const [enquiryOpen, setEnquiryOpen] = useState(false)
   const [appointmentOpen, setAppointmentOpen] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false)
+  const [leadCaptured, setLeadCaptured] = useState(false)
 
   return (
     <AppContext.Provider
@@ -22,6 +30,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setEnquiryOpen,
         appointmentOpen,
         setAppointmentOpen,
+        chatOpen,
+        setChatOpen,
+        leadCaptured,
+        setLeadCaptured,
       }}
     >
       {children}

@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion"
 import { Phone, Mail, MessageCircle } from "lucide-react"
+import { useApp } from "@/app/app-context"
 
 export default function FloatingCTAButtons() {
+  const { chatOpen } = useApp()
   const whatsappNumber = "919326969679"
 
   const message =
@@ -20,15 +22,18 @@ export default function FloatingCTAButtons() {
     <motion.div
       initial={{ opacity: 0, y: 80, scale: 0.9 }}
       animate={{
-        opacity: 1,
-        y: 0,
+        // Auto-hide when the chatbot is open so it never covers the chat input.
+        opacity: chatOpen ? 0 : 1,
+        y: chatOpen ? 120 : 0,
         scale: 1,
       }}
       transition={{
-        duration: 0.8,
+        duration: chatOpen ? 0.35 : 0.8,
         ease: "easeOut",
       }}
-      className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center w-full px-4 pb-6"
+      style={{ pointerEvents: chatOpen ? "none" : "auto" }}
+      aria-hidden={chatOpen}
+      className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center w-full px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
     >
       {/* Border Animation Wrapper */}
       <div className="relative rounded-full p-[2px] overflow-hidden">

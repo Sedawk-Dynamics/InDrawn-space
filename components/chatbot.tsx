@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { MessageCircle, X, Send, Minimize2, Maximize2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useApp } from "@/app/app-context"
 
 interface Message {
   id: string
@@ -27,9 +28,18 @@ const botResponses: { [key: string]: string } = {
   "default": "That's interesting! For more specific information, I'd recommend booking a consultation or calling +91 9326 969 679.",
 }
 
+// Detects whether a chat message contains lead details (phone or email).
+const LEAD_REGEX = /([0-9][\s-]?){10,}|[^\s@]+@[^\s@]+\.[^\s@]+/
+
 export default function ChatBot() {
+  const { setChatOpen, setLeadCaptured } = useApp()
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
+
+  // Keep shared state in sync so the CTA bar and enquiry popup can react.
+  useEffect(() => {
+    setChatOpen(isOpen)
+  }, [isOpen, setChatOpen])
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -67,6 +77,12 @@ export default function ChatBot() {
       timestamp: new Date(),
     }
 
+    // If the user shares a phone number or email in chat, mark the lead as
+    // captured so the enquiry popup never interrupts them afterwards.
+    if (LEAD_REGEX.test(inputValue)) {
+      setLeadCaptured(true)
+    }
+
     setMessages((prev) => [...prev, userMessage])
     setInputValue("")
     setIsLoading(true)
@@ -89,7 +105,7 @@ export default function ChatBot() {
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-24 left-6 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-[var(--brand-teal)] text-white shadow-lg hover:shadow-xl transition-shadow"
+        className="fixed bottom-24 left-6 z-[80] flex items-center justify-center w-14 h-14 rounded-full bg-[var(--brand-teal)] text-white shadow-lg hover:shadow-xl transition-shadow"
         aria-label="Open chat"
       >
         <MessageCircle className="w-7 h-7" />
@@ -102,10 +118,10 @@ export default function ChatBot() {
       initial={{ opacity: 0, scale: 0.95, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className={`fixed z-40 bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-300 ${
+      className={`fixed z-[90] bg-white rounded-2xl shadow-2xl flex flex-col transition-all duration-300 bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 right-4 sm:left-6 sm:right-auto ${
         isMinimized
-          ? "bottom-6 left-6 w-72 h-16"
-          : "bottom-6 left-6 w-72 sm:w-80 h-96 sm:h-[500px]"
+          ? "h-16 sm:w-72"
+          : "h-[70dvh] max-h-[520px] sm:h-[500px] sm:w-80"
       }`}
     >
       {/* Header */}

@@ -19,7 +19,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'InDawn Space – Living Meets Luxury | Premium Interior Design',
   description:
-    'InDawn Space delivers luxury interior design solutions across Dombivli, Thane, Mumbai & Navi Mumbai. 15,000+ dream homes delivered. Free 3D design & consultation.',
+    'InDawn Space delivers luxury interior design solutions across Dombivli, Thane, Mumbai & Navi Mumbai. 88+ dream homes delivered. Free 3D design & consultation.',
   keywords: 'interior design, luxury home, Mumbai interior, InDawn Space, modular kitchen, home decor India, Dombivli',
   openGraph: {
     title: 'InDawn Space – Living Meets Luxury',
@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     width: 'device-width',
     initialScale: 1,
     userScalable: false,
+    viewportFit: 'cover',
   },
   themeColor: '#1a8a80',
 }

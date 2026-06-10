@@ -13,7 +13,7 @@ const slides = [
     subHeadline: "On Modular Interiors",
     ctaText: "Book A Free Consultation",
     ctaLink: "#experience",
-    extraText: "Offer ends on 31st May, 2026",
+    extraText: "Limited Period Offer",
     tncText: "*T&C: Valid in select cities on orders above 5 Lakh."
   },
   {
@@ -111,9 +111,9 @@ export default function HeroSection() {
   return (
     <section id="hero" className="relative w-full overflow-hidden bg-white mt-20 border-b border-gray-100">
       {/* Main Grid Container */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 w-full lg:h-[calc(100vh-80px)] min-h-[600px] lg:min-h-[500px]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 w-full lg:h-[75vh] min-h-[450px] lg:min-h-[420px]">
         {/* Left Side: Images & Floating Card */}
-        <div className="relative lg:col-span-7 xl:col-span-8 h-[40vh] sm:h-[50vh] lg:h-full w-full overflow-hidden bg-gray-50">
+        <div className="relative lg:col-span-7 xl:col-span-8 h-[30vh] sm:h-[40vh] lg:h-full w-full overflow-hidden bg-gray-50">
           <AnimatePresence mode="sync">
             <motion.div
               key={current}
@@ -177,9 +177,7 @@ export default function HeroSection() {
                   <span className="absolute -bottom-1 right-8 w-2 h-2 bg-yellow-400 rounded-full border border-yellow-300 shadow-sm" />
 
                   <div className="flex items-baseline gap-1">
-                    <span className="text-[var(--brand-gold)] text-2xl font-bold tracking-tight lowercase">a</span>
-                    <span className="text-[var(--brand-teal)] text-4xl font-black tracking-tighter uppercase">MAY</span>
-                    <span className="text-[var(--brand-gold)] text-2xl font-bold tracking-tight lowercase">zing</span>
+                    <span className="text-[var(--brand-teal)] text-4xl font-black tracking-tighter lowercase">amazing</span>
                   </div>
                   
                   <div className="mt-1 px-4 py-1 bg-[var(--brand-teal)] text-white text-[11px] font-black tracking-widest uppercase rounded shadow-sm relative">

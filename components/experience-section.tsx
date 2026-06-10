@@ -122,14 +122,14 @@ City: ${formData.city}`,
           className="text-center mb-14"
         >
           <span className="inline-block px-4 py-1.5 bg-[var(--brand-teal)]/10 text-[var(--brand-teal)] text-sm font-medium rounded-full mb-4">
-            Visit Us
+            Contact Us
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[var(--brand-charcoal)] mb-4 text-balance">
-            Visit Our Nearest{" "}
-            <span className="text-[var(--brand-teal)]">Experience Centre</span>
+            Get In{" "}
+            <span className="text-[var(--brand-teal)]">Touch With Us</span>
           </h2>
           <p className="text-[var(--muted-foreground)] max-w-xl mx-auto leading-relaxed">
-            See, touch, and feel premium materials and life-sized room mock-ups at our showrooms. Walk in or book a private viewing.
+            Have questions about your dream home interior? Contact our design experts today and get a free consultation for your space.
           </p>
         </motion.div>
 

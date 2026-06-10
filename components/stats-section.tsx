@@ -56,9 +56,11 @@ const stats = [
   {
     icon: MapPin,
     value: 4,
-    suffix: " Cities",
+    suffix: "+ Cities",
     label: "Across India",
     color: "text-[var(--brand-gold)]",
+    // Rendered statically so it never flashes/sticks on "0 Cities".
+    static: true,
   },
 ]
 
@@ -147,6 +149,10 @@ export default function StatsSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, i) => {
             const Icon = stat.icon
+            const displayValue = ("static" in stat && stat.static
+              ? stat.value
+              : counts[i]
+            ).toLocaleString()
 
             return (
               <motion.div
@@ -170,7 +176,7 @@ export default function StatsSection() {
                 <div
                   className={`font-serif text-3xl sm:text-4xl font-bold ${stat.color} mb-1`}
                 >
-                  {counts[i].toLocaleString()}
+                  {displayValue}
                   {stat.suffix}
                 </div>
 

@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
-    const { name, phone } = await request.json();
+    const { name, phone, email, location, propertyType, whatsappOptIn } = await request.json();
 
     // Validate required fields
     if (!name || !phone) {
@@ -45,10 +45,15 @@ export async function POST(request: Request) {
           <h2 style="color: #1a8a80;">New Enquiry Received</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Mobile Number:</strong> ${phone}</p>
+          ${email ? `<p><strong>Email:</strong> ${email}</p>` : ''}
+          ${location ? `<p><strong>Location / Property Address:</strong> ${location}</p>` : ''}
+          ${propertyType ? `<p><strong>Property Type:</strong> ${propertyType}</p>` : ''}
+          ${whatsappOptIn !== undefined ? `<p><strong>WhatsApp updates:</strong> ${whatsappOptIn ? 'Yes' : 'No'}</p>` : ''}
           <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
           <p style="color: #666; font-size: 12px;">This is an automated message from your website contact form.</p>
         </div>
       `,
+      ...(email ? { replyTo: email } : {}),
     };
 
     // Test the connection first

@@ -83,7 +83,7 @@ export default function Footer() {
               priority
             />
             <p className="text-white/60 text-sm leading-relaxed mb-5">
-              InDawn Space — where living meets luxury. Founded by architects, driven by design excellence, trusted by 15,000+ families across India.
+              InDawn Space — where living meets luxury. Founded by architects, driven by design excellence, trusted by 88+ families across India.
             </p>
 
             {/* Socials */}

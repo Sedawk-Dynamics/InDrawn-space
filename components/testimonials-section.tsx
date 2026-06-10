@@ -73,7 +73,7 @@ export default function TestimonialsSection() {
             <span className="text-[var(--brand-teal)]">Say About Us</span>
           </h2>
           <p className="text-[var(--muted-foreground)] max-w-xl mx-auto leading-relaxed">
-            Over 15,000 happy families across India trust InDawn Space for their dream homes.
+            88+ happy families across India trust InDawn Space for their dream homes.
           </p>
         </motion.div>
 

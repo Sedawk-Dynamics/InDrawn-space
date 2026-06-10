@@ -11,7 +11,7 @@ const milestones = [
   { year: "2018", event: "Crossed 1,000 home interiors delivered" },
   { year: "2020", event: "Expanded to Navi Mumbai and Dombivli" },
   { year: "2023", event: "10,000+ homes milestone; 50+ design awards received" },
-  { year: "2026", event: "15,000+ homes delivered across 4 cities with 200+ designers" },
+  { year: "2026", event: "88+ homes delivered across 4 cities with 200+ designers" },
 ]
 
 const values = [
@@ -108,7 +108,7 @@ export default function FoundedSection() {
               In 2014, two architects from Mumbai — trained at some of India&apos;s leading institutions and having worked on landmark commercial projects — realized that the same discipline and rigour applied to grand architecture was almost never applied to residential interiors.
             </p>
             <p className="text-[var(--muted-foreground)] leading-relaxed mb-8">
-              They founded <strong className="text-[var(--brand-teal)]">InDawn Space</strong> with a mission to bring architectural thinking to every home — from the smallest 1 BHK to sprawling penthouses. Today, with over 200 designers and 15,000+ completed homes, InDawn Space remains true to that founding principle: <em>living meets luxury.</em>
+              They founded <strong className="text-[var(--brand-teal)]">InDawn Space</strong> with a mission to bring architectural thinking to every home — from the smallest 1 BHK to sprawling penthouses. Today, with over 200 designers and 88+ completed homes, InDawn Space remains true to that founding principle: <em>living meets luxury.</em>
             </p>
 
             {/* Values */}
